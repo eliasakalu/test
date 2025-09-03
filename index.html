@@ -20,30 +20,37 @@
       font-family: 'NewFont';
       src: url(./static/Outfit-Regular.ttf);
     }
+    
     body {
       font-family: 'NewFont',sans-serif;
       color: #1e293b;
       background-color: #fff;
       overflow-x: hidden;
     }
+
     h1, .mil-h1 {
     font-size: 92px;
     line-height: 100%;
     }
+    /* Layout Structure */
     .mil-wrapper {
       position: relative;
       width: 100%;
       min-height: 100vh;
       display: flex;
     }
+    
+    /* Content sections (left side) */
     .mil-content {
       width: 65%;
       position: relative;
       z-index: 10;
-      background-color: rgb(253, 253, 253);
+      background-color: rgb(253, 253, 253); /*other wheat also cool*/
       min-height: 100vh;
       padding: 90px 90px 0;
     }
+    
+    /* Fixed right banner */
     .mil-right-banner {
       position: fixed;
       top: 0;
@@ -51,8 +58,10 @@
       width: 35%;
       height: 100vh;
       overflow: hidden;
-      z-index: 900;
+      z-index: 5;
     }
+    
+    /* Top panel / Navigation */
     .mil-top-panel {
       position: fixed;
       top: 0;
@@ -67,16 +76,19 @@
       backdrop-filter: blur(10px);
       transition: all 0.4s ease;
     }
+    
     .mil-top-panel.mil-scrolled {
       padding: 15px 40px;
       box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
     }
+    
     .mil-logo {
       font-size: 24px;
       font-weight: 700;
       text-decoration: none;
       color: #1e293b;
     }
+    
     .mil-dot {
       display: inline-block;
       width: 10px;
@@ -85,11 +97,13 @@
       border-radius: 50%;
       margin-right: 5px;
     }
+    
     .mil-navigation ul {
       list-style: none;
       display: flex;
       gap: 30px;
     }
+    
     .mil-navigation a {
       text-decoration: none;
       color: #1e293b;
@@ -97,6 +111,7 @@
       transition: color 0.3s;
       position: relative;
     }
+    
     .mil-navigation a:after {
       content: '';
       position: absolute;
@@ -107,17 +122,21 @@
       background-color: #2563eb;
       transition: width 0.3s ease;
     }
+    
     .mil-navigation a:hover:after {
       width: 100%;
     }
+    
     .mil-navigation a:hover {
       color: #2563eb;
     }
+    
     .mil-top-panel-btns {
       display: flex;
       align-items: center;
       gap: 20px;
     }
+    
     .mil-contact-btn {
       display: flex;
       align-items: center;
@@ -130,10 +149,129 @@
       text-decoration: none;
       transition: all 0.3s ease;
     }
+    
     .mil-contact-btn:hover {
       transform: scale(1.1);
       background-color: #1d4ed8;
     }
+    
+    /* Mobile menu button - IMPROVED */
+    .mil-mobile-menu-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 30px;
+      height: 30px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 1001;
+    }
+    
+    .mil-mobile-menu-btn span {
+      width: 30px;
+      height: 3px;
+      background: #1e293b;
+      border-radius: 5px;
+      transition: all 0.3s linear;
+      position: relative;
+      transform-origin: 1px;
+    }
+    
+    /* Mobile navigation - IMPROVED */
+    .mil-mobile-nav {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 300px;
+      height: 100vh;
+      background: white;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      padding: 80px 20px 40px;
+    }
+    
+    .mil-mobile-nav.active {
+      transform: translateX(-300px);
+    }
+    
+    .mil-mobile-nav ul {
+      list-style: none;
+      text-align: center;
+      width: 100%;
+    }
+    
+    .mil-mobile-nav li {
+      margin: 15px 0;
+      opacity: 0;
+      transform: translateX(20px);
+      transition: all 0.4s ease;
+    }
+    
+    .mil-mobile-nav.active li {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    .mil-mobile-nav li:nth-child(1) { transition-delay: 0.1s; }
+    .mil-mobile-nav li:nth-child(2) { transition-delay: 0.2s; }
+    .mil-mobile-nav li:nth-child(3) { transition-delay: 0.3s; }
+    .mil-mobile-nav li:nth-child(4) { transition-delay: 0.4s; }
+    
+    .mil-mobile-nav a {
+      font-size: 18px;
+      text-decoration: none;
+      color: #1e293b;
+      font-weight: 500;
+      display: block;
+      padding: 12px 20px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .mil-mobile-nav a:hover {
+      background-color: #f1f5f9;
+      color: #2563eb;
+    }
+    
+    .mil-mobile-menu-btn.active span:nth-child(1) {
+      transform: rotate(45deg);
+    }
+    
+    .mil-mobile-menu-btn.active span:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .mil-mobile-menu-btn.active span:nth-child(3) {
+      transform: rotate(-45deg);
+    }
+    
+    /* Mobile menu overlay */
+    .mil-mobile-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 998;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+    }
+    
+    .mil-mobile-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    /* Left panel */
     .mil-left-panel {
       background-color: white;
       position: fixed;
@@ -145,6 +283,7 @@
       align-items: flex-start;
       padding: 200px 20px 10px;
     }
+    
     .mil-page-name {
       font-size: 14px;
       text-transform: uppercase;
@@ -155,33 +294,40 @@
       writing-mode: vertical-lr;
       transform: rotate(180deg);
     }
+    
     .mil-social-icons {
       list-style: none;
       display: flex;
       flex-direction: column;
       gap: 15px;
     }
+    
     .mil-social-icons a {
       color: #64748b;
       font-size: 18px;
       transition: all 0.3s ease;
     }
+    
     .mil-social-icons a:hover {
       color: #2563eb;
       transform: translateY(-3px);
     }
+    
+    /* Hero section - FIXED POSITIONING */
     .mil-side-banner {
       height: calc(100vh - 90px);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding-top: 60px;
+      padding-top: 60px; /* Added padding to prevent navbar overlap */
     }
+    
     .mil-banner-title {
       margin-bottom: 60px;
       text-align: center;
     }
+    
     .mil-upper {
       text-transform: uppercase;
       letter-spacing: 0.1em;
@@ -189,9 +335,11 @@
       color: #64748b;
       font-weight: 500;
     }
+    
     .mil-dark {
       color: #1e293b;
     }
+    
     .mil-banner-title h1 {
       font-size: 92px;
       line-height: 1.1;
@@ -199,6 +347,8 @@
       color: #1e293b;
       margin: 15px 0;
     }
+    
+    /* Oval frame with circle text - LARGER SIZE */
     .mil-oval-frame {
       padding-top: 25px;
       display: flex;
@@ -210,6 +360,7 @@
       border-top-left-radius: 200px;
       margin: 0 auto;
     }
+    
     .mil-circle-text {
       display: flex;
       justify-content: center;
@@ -218,6 +369,7 @@
       height: 130px;
       position: relative;
     }
+    
     .mil-circle-text .mil-button {
       background-color: rgb(32, 33, 36);
       display: flex;
@@ -230,23 +382,28 @@
       border: solid 15px rgb(255, 255, 255);
       z-index: 15;
     }
+
     .mil-circle-text .mil-ct-svg {
       width: 140px;
       height: 140px;
       transform-origin: center;
       z-index: 10;
     }
+    
     .mil-ct-svg {
       width: 140px;
       height: 140px;
       transform-origin: center;
     }
+    
     textPath {
       font-size: 8px;
       letter-spacing: 4px;
       fill: #1e293b;
       font-weight: 500;
     }
+    
+    /* Larger button */
     .mil-button {
       position: absolute;
       top: 50%;
@@ -265,15 +422,19 @@
       transition: all 0.3s ease;
       box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
     }
+    
     .mil-button:hover {
       transform: translate(-50%, -50%) scale(1.1);
       background-color: #1d4ed8;
       box-shadow: 0 6px 25px rgba(37, 99, 235, 0.4);
     }
+    
     .mil-button svg {
       width: 24px;
       height: 24px;
     }
+    
+    /* Right banner content */
     .mil-banner-wrapper {
       position: absolute;
       top: 0;
@@ -281,6 +442,7 @@
       width: 100%;
       height: 100%;
     }
+    
     .mil-banner-frame {
       position: absolute;
       top: 0;
@@ -289,6 +451,7 @@
       height: 100%;
       overflow: hidden;
     }
+    
     .mil-banner-bg {
       width: 100%;
       height: 100%;
@@ -296,12 +459,15 @@
       object-position: center;
       filter: blur(5px);
     }
+    
     .mil-banner-person {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
     }
+    
+    /* Flying skills elements */
     .mil-flying-skills {
       position: relative;
       top: 0;
@@ -309,11 +475,13 @@
       width: 100%;
       height: 100%;
     }
+    
     .mil-skills-frame {
       position: relative;
       width: 100%;
       height: 100%;
     }
+    
     .mil-item {
       position: absolute;
       width: 50px;
@@ -328,11 +496,13 @@
       transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
       animation: float 6s ease-in-out infinite;
     }
+    
     .mil-item img {
       width: 25px;
       height: 25px;
       object-fit: contain;
     }
+    
     .mil-el {
       position: absolute;
       width: 20px;
@@ -349,36 +519,44 @@
       transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
       animation: float 6s ease-in-out infinite;
     }
+    
     .mil-item:nth-child(1) { 
       top: 25%;
       left: 15%;
       animation-delay: 0s; 
     }
+    
     .mil-item:nth-child(2) { 
       bottom: 20%;
       left: 25%;
       animation-delay: 2s; 
     }
+    
     .mil-item:nth-child(3) { 
       bottom: 40%;
       right: 20%;
       animation-delay: 4s; 
     }
+    
     .mil-el.mil-addition-el-1 { 
       top: 15%;
       right: 30%;
       animation-delay: 1s; 
     }
+    
     .mil-el.mil-addition-el-2 { 
       bottom: 25%;
       left: 35%;
       animation-delay: 3s; 
     }
+    
     @keyframes float {
       0% { transform: translateY(0) rotate(0deg); }
       50% { transform: translateY(-10px) rotate(5deg); }
       100% { transform: translateY(0) rotate(0deg); }
     }
+    
+    /* Progress track (scrollbar) */
     .mil-progress-track {
       position: fixed;
       top: 0;
@@ -388,6 +566,7 @@
       background: rgba(0, 0, 0, 0.1);
       z-index: 990;
     }
+    
     .mil-progress {
       position: absolute;
       top: 0;
@@ -397,9 +576,12 @@
       background: #2563eb;
       transition: height 0.3s ease;
     }
+    
+    /* Additional sections */
     .mil-p-0-90 {
       padding: 0 0 90px 0;
     }
+    
     .mil-oval-frame-2 {
       margin: 0 auto;
       padding-bottom: 25px;
@@ -412,12 +594,14 @@
       border-bottom-left-radius: 200px;
       margin-bottom: 90px;
     }
+    
     .mil-oval-frame-2 img {
       margin-top: auto;
       width: 120px;
       height: 120px;
       border-radius: 50%;
     }
+    
     .mil-section-title {
       position: relative;
       height: 30px;
@@ -427,12 +611,14 @@
       align-items: center;
       margin: 60px auto;
     }
+    
     .mil-divider {
       position: relative;
       width: 100%;
       height: 1px;
       background-color: rgb(233, 233, 233);
     }
+    
     .mil-section-title h3 {
       position: absolute;
       left: 50%;
@@ -443,54 +629,68 @@
       font-weight: 600;
       color: #1e293b;
     }
+    
+    /* Service boxes */
     .mil-p-90-30 {
       padding: 1px 0 30px 0;
     }
+    
     .row {
       display: flex;
       flex-wrap: wrap;
       margin: 0 -15px;
     }
+    
     .justify-content-between {
       justify-content: space-between;
     }
+    
     .align-items-center {
       align-items: center;
     }
+    
     .col-lg-4 {
       flex: 0 0 33.333333%;
       max-width: 33.333333%;
       padding: 0 15px;
     }
+    
     .mil-icon-box {
       padding: 30px;
       border-radius: 10px;
       background-color: rgb(253, 253, 253);
+      /* box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05); */
       transition: transform 0.3s ease;
       height: 100%;
       text-align: center;
       margin-bottom: 60px;
     }
+    
     .mil-icon-box:hover {
       transform: translateY(-5px);
     }
+    
     .mil-service-icon {
       margin-bottom: 20px;
       color: #2563eb;
     }
+    
     .mil-service-icon img {
       height: 60px;
       margin-bottom: 30px;
     }
+    
     .mil-icon-box h5 {
       font-size: 16px;
       margin-bottom: 30px;
       font-weight: 600;
     }
+    
     .mil-icon-box p {
       margin-bottom: 30px;
       color: #64748b;
     }
+    
     .mil-link {
       display: inline-flex;
       align-items: center;
@@ -498,6 +698,7 @@
       color: #2563eb;
       font-weight: 500;
     }
+    
     .mil-icon-link svg {
       border-radius: 50%;
       margin-left: 15px;
@@ -508,9 +709,12 @@
       color: rgb(255, 255, 255);
       transition: 0.2s cubic-bezier(0, 0, 0.3642, 1);
     }
+    
     .mil-icon-link:hover svg {
       transform: translateX(5px);
     }
+    
+    /* Quote style */
     .mil-quote {
       font-size: 12px;
       background-color: rgb(76, 175, 80);
@@ -523,124 +727,256 @@
       color: rgb(255, 255, 255);
       margin-bottom: 30px;
     }
+    
+    /* Signature */
     .mil-sign {
       height: 50px;
       margin-top: 30px;
     }
+    
+    /* Utility classes */
     .mil-mb-30 {
       margin-bottom: 30px !important;
     }
+    
     .mil-mb-90 {
       margin-bottom: 90px !important;
     }
+    
     .mil-center {
+      /* margin-top: 150px; */
       text-align: center;
+      /* max-height: 550px; */
     }
+    
+    /* Animation classes */
     .mil-up {
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
+    
     .is-animating .mil-up {
       opacity: 1;
       transform: translateY(0);
     }
+    
+    /* Footer - UPDATED STYLES */
     .mil-footer {
       color: #f8fafc;
       padding: 40px;
       text-align: center;
       background-color: rgb(32, 33, 36);
       margin-top: 90px;
-      width: 114%;
+      width: 65%;
       position: relative;
       left: 0;
       z-index: 100;
     }
+    
     .mil-footer p {
       margin: 0;
       font-size: 14px;
       letter-spacing: 0.5px;
     }
+    
+    /* Resume content styles */
+    .resume-section {
+      margin-bottom: 60px;
+    }
+    
+    .resume-section h4 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #1e293b;
+      border-bottom: 2px solid #2563eb;
+      padding-bottom: 10px;
+    }
+    
+    .resume-item {
+      margin-bottom: 25px;
+    }
+    
+    .resume-item h5 {
+      font-size: 18px;
+      margin-bottom: 5px;
+      color: #1e293b;
+    }
+    
+    .resume-item .company {
+      font-weight: 600;
+      color: #2563eb;
+    }
+    
+    .resume-item .date {
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 10px;
+    }
+    
+    .resume-item ul {
+      padding-left: 20px;
+    }
+    
+    .resume-item li {
+      margin-bottom: 8px;
+      color: #475569;
+    }
+    
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .skill-tag {
+      background-color: #e0f2fe;
+      color: #0369a1;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+    
+    /* Responsive adjustments */
     @media (max-width: 1200px) {
       .mil-content {
         width: 60%;
         padding: 90px 60px 0;
       }
+      
       .mil-right-banner {
         width: 40%;
       }
+      
       .mil-progress-track {
         right: 40%;
       }
+      
       .mil-footer {
-        width: 114%;
+        width: 60%;
       }
+      
       .mil-banner-title h1 {
         font-size: 72px;
       }
     }
+    
     @media (max-width: 992px) {
       .mil-content {
         width: 100%;
-        padding: 120px 30px 0;
+        padding: 120px 30px 0; /* Increased top padding for mobile */
       }
+      
       .mil-right-banner {
         display: none;
       }
+      
       .mil-progress-track {
         right: 0;
       }
+      
       .mil-banner-title h1 {
         font-size: 50px;
       }
+      
       .col-lg-4 {
         flex: 0 0 100%;
         max-width: 100%;
       }
+      
       .mil-oval-frame {
         width: 170px;
         height: 230px;
       }
+      
       .mil-circle-text {
         width: 130px;
         height: 130px;
       }
+      
       .mil-ct-svg {
         width: 150px;
         height: 150px;
       }
+      
       .mil-footer {
-        width: 115%;
+        width: 100%;
         max-width: 100%;
       }
+      
       .mil-left-panel {
         display: none;
       }
+      
       .mil-side-banner {
-        padding-top: 40px;
+        padding-top: 40px; /* Adjusted for mobile */
+      }
+      
+      /* Mobile navigation styles */
+      .mil-navigation {
+        display: none;
+      }
+      
+      .mil-mobile-menu-btn {
+        display: flex;
+      }
+      
+      .mil-top-panel-btns {
+        gap: 15px;
+      }
+      
+      /* Make SVG scroll indicator more visible on mobile */
+      .mil-ct-svg textPath {
+        fill: #2563eb;
+        font-weight: 600;
       }
     }
   </style>
 </head>
 <body>
+  <!-- Top Navigation -->
   <div class="mil-top-panel">
     <a href="#" class="mil-logo"><span class="mil-dot"></span>B.A</a>
+    
     <div class="mil-navigation">
       <nav>
         <ul>
           <li><a href="#">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
+          <li><a href="#resume">Resume</a></li>
           <li><a href="#" id="download-resume">Download Resume</a></li>
         </ul>
       </nav>
     </div>
+
     <div class="mil-top-panel-btns">
       <a href="mailto:betelehem07ge@gmail.com" class="mil-contact-btn">
         <i class="fas fa-envelope"></i>
       </a>
+      <button class="mil-mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </div>
+
+  <!-- Mobile Navigation Overlay -->
+  <div class="mil-mobile-overlay"></div>
+
+  <!-- Mobile Navigation -->
+  <div class="mil-mobile-nav">
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#" id="download-resume-mobile">Download Resume</a></li>
+    </ul>
+  </div>
+
+  <!-- Left Panel -->
   <div class="mil-left-panel">
     <div class="mil-page-name mil-upper mil-dark">Homepage</div>
     <ul class="mil-social-icons">
@@ -650,17 +986,23 @@
       <li><a href="#" target="_blank" class="social-icon"><i class="fab fa-behance"></i></a></li>
     </ul>
   </div>
+
+  <!-- Progress Track -->
   <div class="mil-progress-track">
     <div class="mil-progress"></div>
   </div>
+
+  <!-- Main Content -->
   <div class="mil-wrapper">
     <div class="mil-content">
+      <!-- Hero Section - FIXED POSITIONING -->
       <section class="mil-side-banner mil-center">
         <div class="mil-banner-title">
           <div class="mil-upper mil-dark mil-up mil-mb-30">HELLO! MY NAME IS</div>
           <h1 class="mil-up mil-mb-30">Betelehem<br>Akalu</h1>
           <p class="mil-upper mil-dark mil-up">I am a Business Analyst and a Software Developer.</p>
         </div>
+        
         <div class="mil-up mil-oval-frame">
           <div class="mil-circle-text">
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 300 300" enable-background="new 0 0 300 300" xml:space="preserve" class="mil-ct-svg" id="rotating-svg">
@@ -671,7 +1013,7 @@
               <g>
                 <use xlink:href="#circlePath" fill="none" />
                 <text style="letter-spacing: 6.5px">
-                  <textPath xlink:href="#circlePath" style="font-size: 24px;"> - Scroll down - Scroll down  </textPath>
+                  <textPath xlink:href="#circlePath" style="font-size: 24px; fill: #1e293b;"> - Scroll down - Scroll down  </textPath>
                 </text>
               </g>
             </svg>
@@ -684,8 +1026,10 @@
           </div>
         </div>
       </section>
-      <section id="about" class="mil-p-0-90">
-        <div class="mil-oval-frame-2 mil-mb-90">
+
+      <!-- About Section -->
+      <section id="about" class="mil-p-0-90" style="margin-top: -90px;">
+        <div class="mil-oval-frame-2 mil-mb-90" style="background-color: rgba(32, 33, 36, 0.1);">
           <img src="nanilogo.png" alt="" srcset="">
         </div>
         <div class="row justify-content-center">
@@ -694,16 +1038,19 @@
               <h2 class="mil-up mil-mb-30">Hi! My name is Betelehem, <br>I'm a Business Analyst and Software Developer</h2>
               <div class="mil-quote mil-up mil-mb-30"><i class="fas fa-quote-left"></i></div>
               <p class="mil-up mil-mb-30">I am a passionate and dedicated professional with a strong focus on creating exceptional solutions. I thrive on transforming complex ideas into intuitive and functional implementations. With a keen eye for detail and a user-centered approach, I strive to deliver impactful solutions that engage and delight users. Let's collaborate to bring your digital products to life!</p>
-              <img src="sign.png" alt="Betelehem Akalu" class="mil-sign mil-up">
+              <div class="mil-up mil-sign" style="font-family: cursive; font-size: 24px; color: #2563eb;">Betelehem Akalu</div>
             </div>
           </div>
         </div>
       </section>
+
+      <!-- Services Section -->
       <div class="mil-section-title mil-up">
         <div class="mil-divider"></div>
         <h3>Services</h3>
       </div>
-      <section class="mil-p-90-30">
+
+      <section id="services" class="mil-p-90-30">
         <div class="row justify-content-between align-items-center">
           <div class="col-lg-4">
             <div class="mil-icon-box mil-center mil-mb-60">
@@ -712,7 +1059,15 @@
               </div>
               <h5 class="mil-up mil-mb-30">UI/UX Design</h5>
               <p class="mil-up mil-mb-30">Elevate your online presence with captivating user interfaces and seamless experiences</p>
-              
+              <div class="mil-up">
+                <a href="#services" class="mil-link mil-icon-link">
+                  <span>Learn more</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </a>
+              </div>
             </div>
           </div>
           <div class="col-lg-4">
@@ -722,7 +1077,15 @@
               </div>
               <h5 class="mil-up mil-mb-30">Business Analysis</h5>
               <p class="mil-up mil-mb-30">Transform business needs into technical requirements and deliver optimal solutions.</p>
-              
+              <div class="mil-up">
+                <a href="#services" class="mil-link mil-icon-link">
+                  <span>Learn more</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </a>
+              </div>
             </div>
           </div>
           <div class="col-lg-4">
@@ -732,38 +1095,55 @@
               </div>
               <h5 class="mil-up mil-mb-30">Web Development</h5>
               <p class="mil-up mil-mb-30">Create responsive, high-performance websites and applications with modern technologies.</p>
-              
+              <div class="mil-up">
+                <a href="#services" class="mil-link mil-icon-link">
+                  <span>Learn more</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </section>
+
+      
+
+      <!-- Footer -->
       <footer class="mil-footer">
-        <p>© <span id="current-year"></span> Betelehem Akalu. All rights reserved.</p>
+        <p>&copy; 2023 Betelehem Akalu. All Rights Reserved.</p>
       </footer>
     </div>
+
+    <!-- Right Banner -->
     <div class="mil-right-banner">
       <div class="mil-banner-wrapper">
         <div class="mil-banner-frame">
-          <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #6366f1, #3b82f6);"></div>
+          <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Background" class="mil-banner-bg">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=761&q=80" alt="Person" class="mil-banner-person">
         </div>
-      </div>
-      <div class="mil-banner-wrapper">
-        <div class="mil-banner-frame">
-          <div style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
-            <div style="width: 300px; height: 300px; border-radius: 50%; background: linear-gradient(45deg, #8b5cf6, #ec4899); opacity: 0.7; filter: blur(40px);"></div>
+        <div class="mil-flying-skills">
+          <div class="mil-skills-frame">
+            <div class="mil-item">
+              <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" alt="JavaScript">
+            </div>
+            <div class="mil-item">
+              <img src="https://cdn-icons-png.flaticon.com/512/1199/1199124.png" alt="HTML">
+            </div>
+            <div class="mil-item">
+              <img src="https://cdn-icons-png.flaticon.com/512/732/732190.png" alt="CSS">
+            </div>
+            <div class="mil-el mil-addition-el-1">BA</div>
+            <div class="mil-el mil-addition-el-2">UX</div>
           </div>
-        </div>
-      </div>
-      <div class="mil-flying-skills">
-        <div class="mil-skills-frame">
-          <img src="nani.jpg" alt="Betelehem Akalu" class="mil-banner-person">
-          <div class="mil-el mil-addition-el-1">+</div>
-          <div class="mil-el mil-addition-el-2">+</div>
         </div>
       </div>
     </div>
   </div>
-<script>
+
+  <script>
   document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('current-year').textContent = new Date().getFullYear();
     document.body.classList.add('is-animating');
