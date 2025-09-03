@@ -1143,88 +1143,153 @@
   </div>
 
   <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('current-year').textContent = new Date().getFullYear();
+document.addEventListener('DOMContentLoaded', function() {
+    // Mobile menu functionality
+    const mobileMenuBtn = document.querySelector('.mil-mobile-menu-btn');
+    const mobileNav = document.querySelector('.mil-mobile-nav');
+    const mobileOverlay = document.querySelector('.mil-mobile-overlay');
+    
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+        });
+    }
+    
+    // Close mobile menu when clicking on overlay
+    if (mobileOverlay) {
+        mobileOverlay.addEventListener('click', function() {
+            mobileMenuBtn.classList.remove('active');
+            mobileNav.classList.remove('active');
+            this.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+    
+    // Close mobile menu when clicking on a link
+    const mobileLinks = document.querySelectorAll('.mil-mobile-nav a');
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            mobileMenuBtn.classList.remove('active');
+            mobileNav.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+
+    // Resume download functionality
+    function downloadResume(e) {
+        e.preventDefault();
+        
+        // Show loading state
+        const originalText = e.target.textContent;
+        const originalHTML = e.target.innerHTML;
+        e.target.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Downloading...';
+        
+        // Create download link
+        const link = document.createElement('a');
+        link.href = 'Resume_Betelehem.pdf';
+        link.download = 'Betelehem_Akalu_Resume.pdf';
+        
+        // Handle download errors
+        link.onerror = function() {
+            alert('Resume file not found. Please contact me directly at betelehem07ge@gmail.com');
+            e.target.innerHTML = originalHTML;
+            e.target.textContent = originalText;
+        };
+        
+        // Simulate click and clean up
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Reset button after a short delay
+        setTimeout(() => {
+            e.target.innerHTML = originalHTML;
+            e.target.textContent = originalText;
+        }, 2000);
+    }
+
+    // Add event listeners to both download buttons
+    const desktopDownloadBtn = document.getElementById('download-resume');
+    const mobileDownloadBtn = document.getElementById('download-resume-mobile');
+    
+    if (desktopDownloadBtn) {
+        desktopDownloadBtn.addEventListener('click', downloadResume);
+    }
+    
+    if (mobileDownloadBtn) {
+        mobileDownloadBtn.addEventListener('click', downloadResume);
+    }
+
+    // Rest of your existing JavaScript
     document.body.classList.add('is-animating');
     gsap.registerPlugin(ScrollTrigger);
     gsap.utils.toArray('.mil-up').forEach(el => {
-      gsap.to(el, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 90%',
-          toggleActions: 'play none none reverse'
-        }
-      });
+        gsap.to(el, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            scrollTrigger: {
+                trigger: el,
+                start: 'top 90%',
+                toggleActions: 'play none none reverse'
+            }
+        });
     });
+    
     const nav = document.querySelector('.mil-top-panel');
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        nav.classList.add('mil-scrolled');
-      } else {
-        nav.classList.remove('mil-scrolled');
-      }
+        if (window.scrollY > 50) {
+            nav.classList.add('mil-scrolled');
+        } else {
+            nav.classList.remove('mil-scrolled');
+        }
     });
+    
     const progressBar = document.querySelector('.mil-progress');
     if (progressBar) {
-      window.addEventListener('scroll', () => {
-        const windowHeight = window.innerHeight;
-        const documentHeight = document.documentElement.scrollHeight;
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const scrollPercent = (scrollTop / (documentHeight - windowHeight)) * 100;
-        progressBar.style.height = scrollPercent + '%';
-      });
+        window.addEventListener('scroll', () => {
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollPercent = (scrollTop / (documentHeight - windowHeight)) * 100;
+            progressBar.style.height = scrollPercent + '%';
+        });
     }
-    
-    // Resume download functionality - THIS IS CORRECT
-    document.getElementById('download-resume').addEventListener('click', function(e) {
-      e.preventDefault();
-      
-      // Show loading state (optional visual feedback)
-      const originalText = this.textContent;
-      this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Downloading...';
-      
-      const link = document.createElement('a');
-      link.href = 'Resume_Betelehem.pdf'; // Make sure this path is correct
-      link.download = 'Betelehem_Akalu_Resume.pdf';
-      
-      // Reset button after a short delay
-      setTimeout(() => {
-        this.innerHTML = originalText;
-      }, 2000);
-      
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    });
 
     const rotatingSvg = document.getElementById('rotating-svg');
-    let lastScrollY = window.scrollY;
-    let rotation = 0;
-    function handleScrollRotation() {
-      const currentScrollY = window.scrollY;
-      const scrollDelta = currentScrollY - lastScrollY;
-      if (Math.abs(scrollDelta) > 0) {
-        rotation += scrollDelta * 0.2;
-        rotatingSvg.style.transform = `rotate(${rotation}deg)`;
-      }
-      lastScrollY = currentScrollY;
-    }
-    let ticking = false;
-    window.addEventListener('scroll', function() {
-      if (!ticking) {
-        window.requestAnimationFrame(function() {
-          handleScrollRotation();
-          ticking = false;
+    if (rotatingSvg) {
+        let lastScrollY = window.scrollY;
+        let rotation = 0;
+        
+        function handleScrollRotation() {
+            const currentScrollY = window.scrollY;
+            const scrollDelta = currentScrollY - lastScrollY;
+            if (Math.abs(scrollDelta) > 0) {
+                rotation += scrollDelta * 0.2;
+                rotatingSvg.style.transform = `rotate(${rotation}deg)`;
+            }
+            lastScrollY = currentScrollY;
+        }
+        
+        let ticking = false;
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                window.requestAnimationFrame(function() {
+                    handleScrollRotation();
+                    ticking = false;
+                });
+                ticking = true;
+            }
         });
-        ticking = true;
-      }
-    });
-    rotatingSvg.style.transform = 'rotate(0deg)';
-    rotatingSvg.style.transition = 'transform 0.2s ease-out';
-  });
+        
+        rotatingSvg.style.transform = 'rotate(0deg)';
+        rotatingSvg.style.transition = 'transform 0.2s ease-out';
+    }
+});
 </script>
 </body>
 </html>
